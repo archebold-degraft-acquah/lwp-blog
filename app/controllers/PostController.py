@@ -24,7 +24,7 @@ class PostController(Controller):
 
     def read_post(self, request: Request, view: View):
         post = Post.find(request.param('id'))
-        return view.render('read', {'post': post, "num_reads": num_reads})
+        return view.render('read', {'post': post})
 
     def update_post(self, response: Response, request: Request, view: View):
         post = Post.find(request.param('id'))
@@ -39,7 +39,7 @@ class PostController(Controller):
             post.save()
             return response.redirect('/').with_success("Post updated successfully")
         else:
-            return response.status(403, "You are not the author of this post. You can't update it!")
+            return response.status(403)
 
 
     def delete_post(self, auth: Auth, response: Response, request: Request, view: View):
