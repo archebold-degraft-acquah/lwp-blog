@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+{{post.title}}
+{% endblock %}
+{% block content %}
+<h1>{{post.title}}</h1>
+{{post.body|safe}}
+@if auth().name == post.author.name
+    <a href="/post/{{post.id}}/update">Edit Post</a><br />
+    <form action="/post/{{post.id}}/delete" method="post">
+    {{ csrf_field }}
+    <a href="/post/{{post.id}}/delete">Delete Post</a>
+    </form>
+@endif
+{% endblock %}

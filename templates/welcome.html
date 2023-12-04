@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+Welcome to talentter
+{% endblock %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center justify-center">
+  <img src="/logo.png" alt="talentter logo" class="h-16 w-16 mb-4">
+  <div class="text-gray-500 text-5xl mb-10 tracking-wide">
+    <h1>Welcome to Talentter</h1>
+@if auth()
+    <a href="/logout">Logout</a>
+@else
+    <a href="/login">Login</a>
+@endif
+  </div>
+  <nav class="flex space-x-4 justify-center text-gray-500 uppercase text-sm">
+    <a href="/" class="px-3 py-2 hover:text-indigo-700">
+      Home
+    </a><br />
+
+    <a href="/create" class="px-3 py-2 hover:text-indigo-700">
+      Create new post
+    </a><br />
+
+    <a href="https://github.com/MasoniteFramework/masonite" class="px-3 py-2 hover:text-indigo-700">
+      GitHub
+    </a><br />
+
+    <a href="https://github.com/sponsors/MasoniteFramework" class="px-3 py-2 hover:text-indigo-700">
+      Sponsor us
+    </a><br />
+
+    <a href="https://twitter.com/masoniteproject" class="px-3 py-2 hover:text-indigo-700">
+      Follow us on Twitter
+    </a><br />
+  </nav>
+<main id="main">
+@if posts
+        <h2>Posts</h2>
+    @for post in posts
+        <h3><a href="/read/{{post.id}}">{{post.title}}</a></h3>
+        <a href="/read/{{post.id}}">Read {{post.title}}</a>
+    @endfor
+@else
+    <p>No post available yet</p>
+@endif
+</main>
+</div>
+{% endblock %}
